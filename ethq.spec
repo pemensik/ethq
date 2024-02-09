@@ -1,3 +1,5 @@
+# it crashes with lto enabled on StringsetParser::parsers first modification
+%define _lto_cflags %{nil}
 
 Name:           ethq
 Version:        0.6.3
@@ -25,7 +27,6 @@ the per-queue statistics too.
 
 
 %build
-CXXFLAGS+=" -O3 -std=c++11 -Wall -Werror"
 %make_build CXXFLAGS="${CXXFLAGS}" LDFLAGS="${LDFLAGS}"
 
 
@@ -34,6 +35,11 @@ CXXFLAGS+=" -O3 -std=c++11 -Wall -Werror"
 %dnl %make_install CFLAGS="${CFLAGS}" LDFLAGS="${LDFLAGS}"
 mkdir -p %{buildroot}%{_sbindir}
 install ethq %{buildroot}%{_sbindir}
+
+
+%check
+./%{name} -h
+./%{name}_test generic < /dev/null
 
 
 %files
