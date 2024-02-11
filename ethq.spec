@@ -3,7 +3,7 @@
 
 Name:           ethq
 Version:        0.6.3
-Release:        %autorelease
+Release:        1%{?dist}
 Summary:        Ethernet NIC Queue stats viewer
 
 %global gitver %(echo %{version} | tr . _)
@@ -50,4 +50,6 @@ install ethq %{buildroot}%{_sbindir}
 
 
 %changelog
-%autochangelog 
+* Sun Feb 11 2024 Petr Menšík <pemensik@redhat.com> - 0.6.3-1
+- Initial rpm package spec
+- Disable lto to prevent crashes
